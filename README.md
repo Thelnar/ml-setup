@@ -165,11 +165,16 @@ Although these instances are becoming less common, there are times when compatib
           ```
         * Recommendation: answer "Yes" when asked whether to run `conda init`
             * Recommendation: Once in conda base environment, remember to `conda update conda`
-
+4. ```python
+   # TODO: Enable GPU-Acceleration within WSL
+   ```
 
 ___
 
 ## Configuring GPU-Enabled Containers
+ ```python
+   # TODO: Walk through GPU-accelerated container creation
+   ```
 ### Description
 ### Purposel
 ### Instructions
