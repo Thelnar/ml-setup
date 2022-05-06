@@ -56,7 +56,7 @@ Anaconda now recommends against adding it to PATH.[^path] To accomodate this whi
     * Within Windows Terminal, set the default profile to the up-to-date Powershell
 4. Conda initialization and update: | [(Noteworthy StackOverflow)](https://stackoverflow.com/questions/56450606/how-to-add-anaconda-powershell-to-vscode)
     *  Initilize and update Anaconda from Anaconda Prompt
-    * ```console
+    * ```PowerShell
         > conda init
         > conda update conda
         ```  
@@ -69,7 +69,7 @@ Anaconda now recommends against adding it to PATH.[^path] To accomodate this whi
     * <details>
         <summary>Show Code</summary>
 
-        ```powershell
+        ```PowerShell
         $loc = 'C:\Users\Jeff\anaconda3'
         cmd /c "$loc\Scripts\activate.bat $loc"
 
@@ -99,7 +99,7 @@ GPU-accelerated learning can drastically speed up the training of many machine l
 4. Verify that tensorflow can see your GPU | [Stack Overflow Reference](https://stackoverflow.com/questions/38559755/how-to-get-current-available-gpus-in-tensorflow)
     * Using the new conda enviroment in Python Interpreter or Jupyter Notebook:
         * Recommended: Utilise VS Code's built-in support for Notebooks.
-    * ```python
+    * ```pycon
       >>> from tensorflow.python.client import device_lib
       >>> device_lib.list_local_devices()
       ```
@@ -123,7 +123,7 @@ Ubuntu was chosen as the Linux distribution for this guide in order to minimize 
     * Reboots are likely required throughout this process
     * Recommended: Install Ubuntu from the Microsoft store
         * Upon accessing the Ubuntu bash for the first time, update the distribution. (And continue to do so regularly)
-            * ```console
+            * ```bash
               ~$ sudo apt update && sudo apt upgrade
               ```
 2. Docker Installation | [Tutorial](https://docs.docker.com/desktop/windows/install/)
@@ -140,15 +140,15 @@ ___
 Although these instances are becoming less common, there are times when compatibility issues result in certain desirable libraries or tools being available in Linux, but not Windows. Additionally, preparing WSL2 for data science grants additional flexibility choosing how to develop, and enables developing and testing linux-based instructions for and from `README` docs.
 ### Instructions
 1. Ensure packages like git are up-to-date
-    * ```console
+    * ```bash
       ~$ sudo apt update && sudo apt upgrade
       ```
     * You can also install or update a singular package, like git:
-        * ```console
+        * ```bash
           ~$ sudo apt-get install git
           ```
 2. Store Git username and email
-    * ```console
+    * ```bash
       ~$ git config --global user.name "Your Name"
       ~$ git config --global user.email "your_email@domain.com"
       ~$ git config --global credential.helper store
@@ -157,7 +157,7 @@ Although these instances are becoming less common, there are times when compatib
     * Copy the link address of the appropriate installer
         * At time of writing: `https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh`
     * Install via WSL CLI:
-        * ```console
+        * ```bash
           ~$ WEBSITE="https://repo.anaconda.com/archive/"
           ~$ DOWNLOAD="Anaconda3-2021.11-Linux-x86_64.sh" # You will want to change this to the most recent / desired distribution
           ~$ wget "$WEBSITE$DOWNLOAD"
