@@ -22,10 +22,12 @@ Version control allows for easy tracking of modifications and progress over time
 
         * Python
         * Github Markdown Preview
-        * Markdown Preview Mermaid Support
         * Github Pull Requests and Issues
         * PowerShell
         * Remote - WSL
+        * Docker
+        * Kubernetes
+        * Remote - Containers
         </details>
 2. Install Git | [Git for Windows](https://git-scm.com/download/win)
     * Recommended: Use VS Code for default editor
@@ -92,18 +94,22 @@ GPU-accelerated learning can drastically speed up the training of many machine l
 ### Instructions
 1. Install the appropriate drivers for your NVIDIA Graphics card | [NVIDIA Drivers](https://www.nvidia.com/Download/index.aspx?lang=en-us)
     * Recommended (if applicable): NVIDIA GeForce Game Ready Driver
-2. Ensure CUDA is Installed| [CUDA Windows Install Guide ](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)
+2. Ensure CUDA is Installed | [CUDA Windows Install Guide ](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)
     * For newer graphics cards and versions of certain drivers, such as NVIDIA GeForce Game Ready Driver, CUDA may come packaged with the driver.
     * CUDA installation can be verified with `nvcc -V` in a terminal
-3. Create conda environment, adding `keras-gpu` and `notebook` | [Details](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
+    ### CUDA-conda Verification:
+3. Create conda environment, adding `keras-gpu`, `pandas`, and `notebook` | [Conda: Getting Started](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
+    * `conda create -n cuda-test notebook keras-gpu pandas`
+    * [Environment Management Docs](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 4. Verify that tensorflow can see your GPU | [Stack Overflow Reference](https://stackoverflow.com/questions/38559755/how-to-get-current-available-gpus-in-tensorflow)
     * Using the new conda enviroment in Python Interpreter or Jupyter Notebook:
         * Recommended: Utilise VS Code's built-in support for Notebooks.
     * ```python
-      >>> from tensorflow.python.client import device_lib
-      >>> device_lib.list_local_devices()
+      # Verify that the GPU is visible
+      from tensorflow.python.client import device_lib
+      [x.physical_device_desc or x.name for x in device_lib.list_local_devices()]
       ```
-5. Try training a simple model on the MNIST digit data set | [Tutorial](https://www.kaggle.com/code/hassanamin/tensorflow-mnist-gpu-tutorial/notebook)
+5. *(Optional)* Try training a simple model on the MNIST digit data set | [Tutorial](https://www.kaggle.com/code/hassanamin/tensorflow-mnist-gpu-tutorial/notebook)
 ___
 ## Docker, Using WSL with Ubuntu
 ### Description
@@ -112,7 +118,7 @@ ___
 ### Purpose: Universal Deployment from Virtualization
 Docker enables developers to ensure their code can run anywhere, and greatly eases the construction and maintenance of microservices architecture and CI/CD pipelines. Although most useful for professional and enterprise-scale applications, amateur data scientists can still greatly benefit from learning the basics of Docker, enabling them to more easily collaborate with others regardless of hardware differences.
 
-In the past, Docker ran on Windows using Hyper-V; now, however, WSL2 is the prefered VM backend[^prefer]. (Of note, WSL2 actually uses Hyper-V architecture to enable *its* virtualization)[^hyperv]
+In the past, Docker ran on Windows using Hyper-V; now, however, WSL2 is the prefered VM backend for Windows[^prefer]. (Of note, WSL2 actually uses Hyper-V architecture to enable *its* virtualization)[^hyperv]
 
 Ubuntu was chosen as the Linux distribution for this guide in order to minimize the burden on those with no or little Linux experience, as it is one of the most popular and user-friendly distros.
 [^prefer]: https://docs.docker.com/desktop/windows/wsl/
@@ -137,7 +143,8 @@ ___
 *(Optional)*
 <!-- ### Description -->
 ### Purpose
-Although these instances are becoming less common, there are times when compatibility issues result in certain desirable libraries or tools being available in Linux, but not Windows. Additionally, preparing WSL2 for data science grants additional flexibility choosing how to develop, and enables developing and testing linux-based instructions for and from `README` docs.
+Although these instances are becoming less common, there are times when compatibility issues result in certain desirable libraries or tools being available in Linux, but not Windows[^fast.ai]. Additionally, preparing WSL2 for data science grants additional flexibility choosing how to develop, and enables developing and testing linux-based instructions for and from `README` docs.
+[^fast.ai]:https://docs.fast.ai/#Windows-Support
 ### Instructions
 1. Ensure packages like git are up-to-date
     * ```console
@@ -162,12 +169,18 @@ Although these instances are becoming less common, there are times when compatib
           ~$ DOWNLOAD="Anaconda3-2021.11-Linux-x86_64.sh" # You will want to change this to the most recent / desired distribution
           ~$ wget "$WEBSITE$DOWNLOAD"
           ~$ sh ./$DOWNLOAD
+          ~$ # After successful install, optional:
+          ~$ # rm $DOWNLOAD
           ```
         * Recommendation: answer "Yes" when asked whether to run `conda init`
             * Recommendation: Once in conda base environment, remember to `conda update conda`
-4. ```python
-   # TODO: Enable GPU-Acceleration within WSL
-   ```
+4. At this point tensorflow should be able to utilize the GPU, but the first time certain commands are ran, such as the import command, there will be 1-3 minutes of set-up required, per session.
+
+5. [Perform the same verification process as done for Windows](#conda-verification)
+    * Recommendation: Open a remote instance of VS Code
+        * This requires the "WSL - Remote" Extension to be installed.
+        * VS Code extensions are not cross-installed to the remote instance, and will need to be installed.
+        * VS Code (Remote) will operate better when opening directories 
 
 ___
 
