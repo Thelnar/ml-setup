@@ -8,7 +8,7 @@ Set-AuthenticodeSignature -FilePath $loc\shell\condabin\Conda.psm1 -Certificate 
 Set-AuthenticodeSignature -FilePath $loc\shell\condabin\conda-hook.ps1 -Certificate $codeCertificate -TimeStampServer http://timestamp.digicert.com
 
 # SIG # Begin signature block
-# MIIWEAYJKoZIhvcNAQcCoIIWATCCFf0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
+# MIIWEAYJKozIhvcNAQcCoIIWATCCFf0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
 # AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURhMLXefTjbKC1TE4p+l4zG2E
 # eNygghCGMIIDBjCCAe6gAwIBAgIQeEas/OErQ7RJAL0v4xuEZTANBgkqhkiG9w0B
